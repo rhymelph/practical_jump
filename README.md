@@ -19,11 +19,12 @@ import 'package:practical_jump/practical_jump.dart';
 - 跳转到支付宝指定账户进行转账
 
 ```dart
-  /// [code] 这个code获取方式
+  /// params: [code] 这个code获取方式
   /// - 将支付宝收款二维码保存到相册
   /// - 通过微信扫一扫上面保存的二维码
   /// - 得到的网址大概为https://qr.alipay.com/fkx09281vnqgwcfsu3hzo2d?t=1562234400582
   /// - 其中的fkx09281vnqgwcfsu3hzo2d 就是我们需要的code
+  /// result: 返回是否跳转成功
   PracticalJump.jumpToAlipay(String code);
 
 ```
@@ -32,6 +33,7 @@ import 'package:practical_jump/practical_jump.dart';
 
 ```dart
 
-  /// 指定你要跳转的QQ号码
+  /// params: [qqNumber] 指定你要跳转的QQ号码
+  /// result：返回是否跳转成功
   PracticalJump.jumpToQQChart(String qqNumber);
 ```

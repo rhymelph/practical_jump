@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
             ListTile(
               title: Text('QQ临时会话'),
               onTap: () {
-                PracticalJump.jumpToQQChart('2211476137');
+                PracticalJump.jumpToQQChart('708959817');
               },
             ),
             ListTile(

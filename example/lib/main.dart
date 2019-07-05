@@ -43,6 +43,12 @@ class _MyAppState extends State<MyApp> {
                 PracticalJump.jumpToQQGroup('rHLb4DsCDGs4zx_tyuO2vthmRSQz0QHX');
               },
             ),
+            ListTile(
+              title: Text('微信二维码扫一扫'),
+              onTap: () {
+                PracticalJump.jumpToWeChatScan();
+              },
+            ),
           ],
         ),
       ),

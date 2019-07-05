@@ -27,4 +27,9 @@ class PracticalJump {
   static Future<bool> jumpToQQGroup(String qqGroupKey){
     return _channel.invokeMethod('jumpToQQGroup',qqGroupKey);
   }
+
+  /// 微信二维码扫一扫界面
+  static Future<bool> jumpToWeChatScan(){
+    return _channel.invokeMethod('jumpToWeChatScan');
+  }
 }

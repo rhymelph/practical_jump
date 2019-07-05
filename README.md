@@ -16,6 +16,8 @@ dependencies:
 import 'package:practical_jump/practical_jump.dart';
 ```
 
+### 支付宝
+
 - 跳转到支付宝指定账户进行转账
 
 ```dart
@@ -28,6 +30,7 @@ import 'package:practical_jump/practical_jump.dart';
   PracticalJump.jumpToAlipay(String code);
 
 ```
+### QQ
 
 - 跳转到QQ进行临时会话
 
@@ -48,4 +51,13 @@ import 'package:practical_jump/practical_jump.dart';
   /// - 选择Android代码
   /// result：返回是否跳转成功
   PracticalJump.jumpToQQGroup(String qqGroupKey);
+```
+
+### 微信
+
+- 跳转到微信二维码扫一扫界面
+
+```dart
+
+  PracticalJump.jumpToWeChatScan();
 ```

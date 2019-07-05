@@ -28,7 +28,13 @@ class _MyAppState extends State<MyApp> {
             ListTile(
               title: Text('支付宝支付'),
               onTap: () {
-                PracticalJump.jumpToAlipay('fkx09281vnqgwcfsu3hzo2d');
+                PracticalJump.jumpToAlipayPay('fkx09281vnqgwcfsu3hzo2d');
+              },
+            ),
+            ListTile(
+              title: Text('支付宝二维码扫一扫'),
+              onTap: () {
+                PracticalJump.jumpToAlipayScan();
               },
             ),
             ListTile(
@@ -47,6 +53,20 @@ class _MyAppState extends State<MyApp> {
               title: Text('微信二维码扫一扫'),
               onTap: () {
                 PracticalJump.jumpToWeChatScan();
+              },
+            ),
+            ListTile(
+              title: Text('微信分享文本给朋友'),
+              onTap: () {
+                PracticalJump.jumpToWeChatFriendShare(
+                    content:'分享的文本');
+              },
+            ),
+            ListTile(
+              title: Text('微信分享文本到朋友圈'),
+              onTap: () {
+                PracticalJump.jumpToWeChatCircleShare(
+                    content:'分享的文本');
               },
             ),
           ],

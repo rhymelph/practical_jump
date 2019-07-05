@@ -27,7 +27,7 @@ import 'package:practical_jump/practical_jump.dart';
   /// - 得到的网址大概为https://qr.alipay.com/fkx09281vnqgwcfsu3hzo2d?t=1562234400582
   /// - 其中的fkx09281vnqgwcfsu3hzo2d 就是我们需要的code
   /// result: 返回是否跳转成功
-  PracticalJump.jumpToAlipay(String code);
+  PracticalJump.jumpToAlipayPay(String code);
 
 ```
 ### QQ

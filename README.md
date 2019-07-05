@@ -2,6 +2,20 @@
 
 > 目前该插件只支持Android系统
 
+## 使用
+添加pub
+
+```yaml
+dependencies:
+  practical_jump:
+    git: https://github.com/rhymelph/practical_jump.git
+```
+导包
+
+```dart
+import 'package:practical_jump/practical_jump.dart';
+```
+
 - 跳转到支付宝指定账户进行转账
 
 ```dart

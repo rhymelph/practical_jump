@@ -41,6 +41,8 @@ public class PracticalJumpPlugin implements MethodCallHandler {
             jumpToAlipay(call, result);
         } else if (call.method.equals("jumpToQQChart")) {
             jumpToQQChart(call, result);
+        }else if (call.method.equals("jumpToQQGroup")) {
+            jumpToQQGroup(call, result);
         }else{
             result.notImplemented();
         }
@@ -49,6 +51,12 @@ public class PracticalJumpPlugin implements MethodCallHandler {
     private void jumpToQQChart(MethodCall call, Result result) {
         String qqNumber = (String) call.arguments;
         boolean isSuccess = QQTalk(PracticalJumpPlugin.registrar.activity(), qqNumber);
+        result.success(isSuccess);
+    }
+
+    private void jumpToQQGroup(MethodCall call, Result result) {
+        String qqGroupKey = (String) call.arguments;
+        boolean isSuccess = joinQQGroup(PracticalJumpPlugin.registrar.activity(), qqGroupKey);
         result.success(isSuccess);
     }
 
@@ -69,6 +77,19 @@ public class PracticalJumpPlugin implements MethodCallHandler {
             return false;
         }
     }
+    public boolean joinQQGroup(Activity activity,String key) {
+        Intent intent = new Intent();
+        intent.setData(Uri.parse("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3D" + key));
+        // 此Flag可根据具体产品需要自定义，如设置，则在加群界面按返回，返回手Q主界面，不设置，按返回会返回到呼起产品界面    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        try {
+            activity.startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            // 未安装手Q或安装的版本不支持
+            return false;
+        }
+    }
+
     @TargetApi(Build.VERSION_CODES.DONUT)
     private static boolean PayAlipay(Activity activity, String intentFullUrl) {
         try {

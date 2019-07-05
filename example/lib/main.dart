@@ -37,6 +37,12 @@ class _MyAppState extends State<MyApp> {
                 PracticalJump.jumpToQQChart('2211476137');
               },
             ),
+            ListTile(
+              title: Text('QQ群入群或会话'),
+              onTap: () {
+                PracticalJump.jumpToQQGroup('rHLb4DsCDGs4zx_tyuO2vthmRSQz0QHX');
+              },
+            ),
           ],
         ),
       ),

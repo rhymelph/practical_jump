@@ -37,3 +37,15 @@ import 'package:practical_jump/practical_jump.dart';
   /// result：返回是否跳转成功
   PracticalJump.jumpToQQChart(String qqNumber);
 ```
+
+- 跳转到QQ群进行入群或会话
+
+```dart
+
+  /// params: [qqGroupKey] 这个key获取方式
+  /// - 登录[网址](https://qun.qq.com/join.html)
+  /// - 选择您的群
+  /// - 选择Android代码
+  /// result：返回是否跳转成功
+  PracticalJump.jumpToQQGroup(String qqGroupKey);
+```

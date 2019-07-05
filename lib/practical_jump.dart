@@ -19,4 +19,12 @@ class PracticalJump {
   static Future<bool> jumpToQQChart(String qqNumber){
     return _channel.invokeMethod('jumpToQQChart',qqNumber);
   }
+
+  /// [qqGroupKey] 这个key获取方法
+  /// - 登录[网址](https://qun.qq.com/join.html)
+  /// - 选择您的群
+  /// - 选择Android代码
+  static Future<bool> jumpToQQGroup(String qqGroupKey){
+    return _channel.invokeMethod('jumpToQQGroup',qqGroupKey);
+  }
 }

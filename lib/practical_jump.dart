@@ -49,12 +49,10 @@ class PracticalJump {
   }
 
   /// [content] 要分享的内容
-  /// 微信朋友圈分享文字图片
-  static Future<bool> jumpToWeChatCircleShare(
-      {String content, File imageFile}) {
+  /// 微信好友分享文字图片
+  static Future<bool> jumpToWeChatWalletCoinDirect() {
     Map<String, dynamic> params = {};
-    if (content != null) params['content'] = content;
-    if (imageFile != null) params['imageFile'] = imageFile.path;
-    return _channel.invokeMethod('jumpToWeChatCircleShare', params);
+    return _channel.invokeMethod('jumpToWeChatWalletCoinDirect', params);
   }
+
 }

@@ -63,10 +63,9 @@ class _MyAppState extends State<MyApp> {
               },
             ),
             ListTile(
-              title: Text('微信分享文本到朋友圈'),
+              title: Text('微信付款码'),
               onTap: () {
-                PracticalJump.jumpToWeChatCircleShare(
-                    content:'分享的文本');
+                PracticalJump.jumpToWeChatWalletCoinDirect();
               },
             ),
           ],

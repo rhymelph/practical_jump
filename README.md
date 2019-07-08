@@ -30,6 +30,12 @@ import 'package:practical_jump/practical_jump.dart';
   PracticalJump.jumpToAlipayPay(String code);
 
 ```
+- 跳转到支付宝扫一扫
+
+```dart
+  /// result: 返回是否跳转成功
+  PracticalJump.jumpToAlipayScan();
+```
 ### QQ
 
 - 跳转到QQ进行临时会话

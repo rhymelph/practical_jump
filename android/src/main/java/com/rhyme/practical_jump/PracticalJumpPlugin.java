@@ -52,8 +52,8 @@ public class PracticalJumpPlugin implements MethodCallHandler {
             jumpToWeChatScan(call, result);
         } else if (call.method.equals("jumpToWeChatFriendShare")) {
             jumpToWeChatFriendShare(call, result);
-        } else if (call.method.equals("jumpToWeChatCircleShare")) {
-            jumpToWeChatCircleShare(call, result);
+        } else if (call.method.equals("jumpToWeChatWalletCoinDirect")) {
+            jumpToWeChatWalletCoinDirect(call, result);
         } else {
             result.notImplemented();
         }
@@ -73,15 +73,13 @@ public class PracticalJumpPlugin implements MethodCallHandler {
         boolean isSuccess = toWeChatFriendShare(PracticalJumpPlugin.registrar.activity(), content, imageFile);
         result.success(isSuccess);
     }
-
-    private void jumpToWeChatCircleShare(MethodCall call, Result result) {
+    private void jumpToWeChatWalletCoinDirect(MethodCall call, Result result) {
         String content = (String) call.argument("content");
         String imageFile = (String) call.argument("imageFile");
-        boolean isSuccess = toWeChatCircleShare(PracticalJumpPlugin.registrar.activity(), content, imageFile);
+        boolean isSuccess = toWeChatWalletOffineCoinDirect(PracticalJumpPlugin.registrar.activity());
         result.success(isSuccess);
     }
-//START u0 {act=android.intent.action.VIEW flg=0x10000000 pkg=com.tencent.mm cmp=com.tencent.mm/.plugin.offline.ui.WalletOfflineCoinPurseUI (has extras)} from uid 10005
-//START u0 {act=android.intent.action.VIEW flg=0x14000000 cmp=com.tencent.mm/.ui.LauncherUI (has extras)} from uid 10773
+
     @SuppressLint("WrongConstant")
     private static boolean toWeChatScanDirect(Activity activity) {
         try {
@@ -96,20 +94,21 @@ public class PracticalJumpPlugin implements MethodCallHandler {
             return false;
         }
     }
+//START u0 {act=android.intent.action.VIEW flg=0x10000000 pkg=com.tencent.mm cmp=com.tencent.mm/.plugin.offline.ui.WalletOfflineCoinPurseUI (has extras)} from uid 10005
+//START u0 {act=android.intent.action.VIEW flg=0x14000000 cmp=com.tencent.mm/.ui.LauncherUI (has extras)} from uid 10773
     @SuppressLint("WrongConstant")
     private static boolean toWeChatWalletOffineCoinDirect(Activity activity) {
         try {
-            Intent intent = new Intent();
-            intent.setComponent(new ComponentName("com.tencent.mm", "com.tencent.mm.plugin.offline.ui.WalletOfflineCoinPurseUI"));
-            intent.putExtra("LauncherUI.From.Scaner.Shortcut", true);
-            intent.setFlags(335544320);
-            intent.setAction("android.intent.action.VIEW");
+            Uri uri = Uri.parse("alipayqr://platformapi/startapp?saId=10000007");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             activity.startActivity(intent);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
+
     @SuppressLint("WrongConstant")
     private static boolean toWeChatFriendShare(Activity activity, String content, String imageFile) {
         try {
@@ -133,28 +132,6 @@ public class PracticalJumpPlugin implements MethodCallHandler {
         }
     }
 
-    @SuppressLint("WrongConstant")
-    private static boolean toWeChatCircleShare(Activity activity, String content, String imageFile) {
-        try {
-            Intent intent = new Intent();
-            ComponentName comp = new ComponentName("com.tencent.mm",
-                    "com.tencent.mm.ui.tools.ShareToTimeLineUI");
-            intent.setAction("android.intent.action.SEND");
-            intent.setComponent(comp);
-            if (content != null) {
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, content);
-            }
-            if (imageFile != null) {
-                intent.setType("image/*");
-                intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(imageFile)));
-            }
-            activity.startActivity(intent);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
     /******************************************QQ******************************************/
     private void jumpToQQChart(MethodCall call, Result result) {

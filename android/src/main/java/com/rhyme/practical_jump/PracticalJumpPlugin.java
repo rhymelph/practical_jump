@@ -52,8 +52,6 @@ public class PracticalJumpPlugin implements MethodCallHandler {
             jumpToWeChatScan(call, result);
         } else if (call.method.equals("jumpToWeChatFriendShare")) {
             jumpToWeChatFriendShare(call, result);
-        } else if (call.method.equals("jumpToWeChatWalletCoinDirect")) {
-            jumpToWeChatWalletCoinDirect(call, result);
         } else {
             result.notImplemented();
         }
@@ -63,25 +61,19 @@ public class PracticalJumpPlugin implements MethodCallHandler {
 
     /******************************************微信******************************************/
     private void jumpToWeChatScan(MethodCall call, Result result) {
-        boolean isSuccess = toWeChatScanDirect(PracticalJumpPlugin.registrar.activity());
+        boolean isSuccess = openWeChatScan(PracticalJumpPlugin.registrar.activity());
         result.success(isSuccess);
     }
 
     private void jumpToWeChatFriendShare(MethodCall call, Result result) {
         String content = (String) call.argument("content");
         String imageFile = (String) call.argument("imageFile");
-        boolean isSuccess = toWeChatFriendShare(PracticalJumpPlugin.registrar.activity(), content, imageFile);
-        result.success(isSuccess);
-    }
-    private void jumpToWeChatWalletCoinDirect(MethodCall call, Result result) {
-        String content = (String) call.argument("content");
-        String imageFile = (String) call.argument("imageFile");
-        boolean isSuccess = toWeChatWalletOffineCoinDirect(PracticalJumpPlugin.registrar.activity());
+        boolean isSuccess = openWeChatFriendShare(PracticalJumpPlugin.registrar.activity(), content, imageFile);
         result.success(isSuccess);
     }
 
     @SuppressLint("WrongConstant")
-    private static boolean toWeChatScanDirect(Activity activity) {
+    private static boolean openWeChatScan(Activity activity) {
         try {
             Intent intent = new Intent();
             intent.setComponent(new ComponentName("com.tencent.mm", "com.tencent.mm.ui.LauncherUI"));
@@ -94,23 +86,9 @@ public class PracticalJumpPlugin implements MethodCallHandler {
             return false;
         }
     }
-//START u0 {act=android.intent.action.VIEW flg=0x10000000 pkg=com.tencent.mm cmp=com.tencent.mm/.plugin.offline.ui.WalletOfflineCoinPurseUI (has extras)} from uid 10005
-//START u0 {act=android.intent.action.VIEW flg=0x14000000 cmp=com.tencent.mm/.ui.LauncherUI (has extras)} from uid 10773
-    @SuppressLint("WrongConstant")
-    private static boolean toWeChatWalletOffineCoinDirect(Activity activity) {
-        try {
-            Uri uri = Uri.parse("alipayqr://platformapi/startapp?saId=10000007");
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            activity.startActivity(intent);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
     @SuppressLint("WrongConstant")
-    private static boolean toWeChatFriendShare(Activity activity, String content, String imageFile) {
+    private static boolean openWeChatFriendShare(Activity activity, String content, String imageFile) {
         try {
             Intent intent = new Intent();
             ComponentName comp = new ComponentName("com.tencent.mm",
@@ -136,17 +114,17 @@ public class PracticalJumpPlugin implements MethodCallHandler {
     /******************************************QQ******************************************/
     private void jumpToQQChart(MethodCall call, Result result) {
         String qqNumber = (String) call.arguments;
-        boolean isSuccess = QQTalk(PracticalJumpPlugin.registrar.activity(), qqNumber);
+        boolean isSuccess = openQQTalk(PracticalJumpPlugin.registrar.activity(), qqNumber);
         result.success(isSuccess);
     }
 
     private void jumpToQQGroup(MethodCall call, Result result) {
         String qqGroupKey = (String) call.arguments;
-        boolean isSuccess = joinQQGroup(PracticalJumpPlugin.registrar.activity(), qqGroupKey);
+        boolean isSuccess = openQQGroup(PracticalJumpPlugin.registrar.activity(), qqGroupKey);
         result.success(isSuccess);
     }
 
-    private static boolean QQTalk(Activity activity, String QQ) {
+    private static boolean openQQTalk(Activity activity, String QQ) {
         Intent intent = new Intent();
         intent.setData(Uri.parse("mqqwpa://im/chat?chat_type=wpa&uin=" + QQ));
         try {
@@ -158,7 +136,7 @@ public class PracticalJumpPlugin implements MethodCallHandler {
         }
     }
 
-    private boolean joinQQGroup(Activity activity, String key) {
+    private boolean openQQGroup(Activity activity, String key) {
         Intent intent = new Intent();
         intent.setData(Uri.parse("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3D" + key));
         // 此Flag可根据具体产品需要自定义，如设置，则在加群界面按返回，返回手Q主界面，不设置，按返回会返回到呼起产品界面    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -174,7 +152,7 @@ public class PracticalJumpPlugin implements MethodCallHandler {
     /******************************************支付宝******************************************/
     private static void jumpToAlipayPay(MethodCall call, Result result) {
         String code = (String) call.arguments;
-        boolean isSuccess = PayAlipay(PracticalJumpPlugin.registrar.activity(), INTENT_URL_FORMAT.replace("{payCode}", String.valueOf(code)));
+        boolean isSuccess = openPayAlipayPay(PracticalJumpPlugin.registrar.activity(), INTENT_URL_FORMAT.replace("{payCode}", String.valueOf(code)));
         result.success(isSuccess);
     }
     private void jumpToAlipayScan(MethodCall call, Result result) {
@@ -182,7 +160,7 @@ public class PracticalJumpPlugin implements MethodCallHandler {
         result.success(isSuccess);
     }
     @TargetApi(Build.VERSION_CODES.DONUT)
-    private static boolean PayAlipay(Activity activity, String intentFullUrl) {
+    private static boolean openPayAlipayPay(Activity activity, String intentFullUrl) {
         try {
             Intent intent = Intent.parseUri(intentFullUrl, Intent.URI_INTENT_SCHEME);
             activity.startActivity(intent);

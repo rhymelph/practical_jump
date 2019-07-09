@@ -64,6 +64,16 @@ import 'package:practical_jump/practical_jump.dart';
 - 跳转到微信二维码扫一扫界面
 
 ```dart
-
+  /// result：返回是否跳转成功
   PracticalJump.jumpToWeChatScan();
+```
+
+- 分享图片或文本给微信好友
+
+```dart
+  /// params: [content] 文本
+  ///         [imageFile] 图片文件
+  ///         参数为多选，但不能不传
+  /// result：返回是否跳转成功
+  PracticalJump.jumpToWeChatFriendShare({String content, File imageFile});
 ```
